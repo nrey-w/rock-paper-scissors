@@ -16,7 +16,7 @@ function determineWinner(selection1, selection2){
 
     let winner;
     const pair1 = [PAPER, SCISSORS];
-    const pair2 =[ROCK, PAPER];
+    const pair2 = [ROCK, PAPER];
     const pair3 = [SCISSORS, ROCK];
 
     if (pair1.includes(selection1) && pair1.includes(selection2)){
@@ -36,12 +36,13 @@ function playRound(playerSelection, computerSelection){
     
     let playerSelectionLower = playerSelection.toLowerCase();
     if (playerSelectionLower === computerSelection) {
-        return 'It is a tie!';
+        console.log('It is a tie!');
+        return 0;
     } 
 
     let winner = determineWinner(playerSelectionLower, computerSelection);
 
-    if (playerSelectionLower == winner) {
+    if (playerSelectionLower === winner) {
         console.log(`You Won! ${playerSelection} beats ${computerSelection}.`);
         return true;
     } else {
@@ -60,10 +61,10 @@ function game(){
     let round;
  
 
-    for (let index=1; index<=3; index++){
+    for (let index=1; index<=5; index++){
 
         playerSelection = prompt("Scissors, rock or paper?");
-        if (playerSelection==null){
+        if (playerSelection === null){
             if (confirm("Do you wish to play?")){
                 continue;
             }
@@ -75,20 +76,17 @@ function game(){
             continue;
             }
 
-            
-
-       //computerSelection = computerPlay();
-       computerSelection = 'rock';
+       computerSelection = computerPlay();
        console.log(`----- Round ${index} -----`);
        console.log(`Player: ${playerSelection}`);
        console.log(`Computer: ${computerSelection}`);
        round = playRound(playerSelection, computerSelection);
-       console.log(round);
-       if (round === 'It is a tie!'){
+
+       if (round === 0){
         index--;
         continue;
-    } 
-       else if (round){
+        } 
+       else if (round) {
             ++playerCount; 
         }
         else {
@@ -96,8 +94,8 @@ function game(){
         }
         console.log(`Player: ${playerCount}`);
         console.log(`Computer: ${computerCount}`);
-
     }
+
     if (playerSelection === null){
         alert("Aborting the game!");
         return "Aborting the game!";
