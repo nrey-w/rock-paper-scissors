@@ -3,7 +3,6 @@ const ROCK = 'rock';
 const SCISSORS = 'scissors';
 const OPTIONS = [PAPER, ROCK, SCISSORS];
 
-
 function generateRandomInt(max){
     return Math.floor(Math.random() * max);
 }
@@ -13,17 +12,34 @@ function computerPlay(){
     return OPTIONS[index];
 }
 
-const computerSelection = computerPlay();
-const playerSelection = "rock";
+function determineWinner(selection1, selection2){
+
+    let winner;
+    const pair1 = [PAPER, SCISSORS];
+    const pair2 =[ROCK, PAPER];
+    const pair3 = [SCISSORS, ROCK];
+
+    if (pair1.includes(selection1) && pair1.includes(selection2)){
+        winner = SCISSORS;
+    } 
+    else if (pair2.includes(selection1) && pair2.includes(selection2)){
+        winner = PAPER;
+    }
+    else if (pair3.includes(selection1) && pair3.includes(selection2)){
+        winner = ROCK;
+    }
+    return winner;
+
+}
 
 function playRound(playerSelection, computerSelection){
     
     let playerSelectionLower = playerSelection.toLowerCase();
-    if (playerSelection==computerSelection) {
+    if (playerSelectionLower==computerSelection) {
         return 'It is a tie!';
     } 
 
-    let winner = getWinner (playerSelectionLower, computerSelection);
+    let winner = determineWinner(playerSelectionLower, computerSelection);
 
     if (playerSelectionLower == winner) {
         return `You Won! ${playerSelection} beats ${computerSelection}.`;
@@ -31,28 +47,63 @@ function playRound(playerSelection, computerSelection){
         return `You Lost! ${computerSelection} beats ${playerSelection}.`;
     }
 
+}
 
+function game(){
+
+    let playerCount = 0;
+    let computerCount = 0;
+    let playerSelection;
+    let computerSelection;
+    let round;
+    let isValid;
+
+    for (let index=1; index<=5; index++){
+
+        playerSelection = prompt("Scissors, rock or paper?");
+        if (playerSelection==null){
+            if (confirm("Do you wish to play?")){
+                continue;
+            }
+            else {
+                break;
+            }
+        } else if (playerSelection == '' || !OPTIONS.includes(playerSelection.toLowerCase())){
+            alert("Invalid input!");
+            playerSelection = prompt("Choose scissors, rock or paper?");
+            }
+            
+
+       computerSelection = computerPlay()
+       console.log(`----- Round ${index} -----`);
+       console.log(`Player: ${playerSelection}`);
+       console.log(`Computer: ${computerSelection}`);
+       round = playRound(playerSelection, computerSelection);
+       console.log(round);
+        if (round.includes('You Won!')){
+            ++playerCount; 
+        }
+        else if(round.includes('You Lost!')){
+            ++computerCount;        
+        }
+        console.log(`Player: ${playerCount}`);
+        console.log(`Computer: ${computerCount}`);
+
+    }
+    if (playerSelection==null){
+        alert("Aborting the game!");
+    }else {
+    if (playerCount > computerCount){
+        return 'You won the game!'
+    }
+    else if(playerCount < computerCount){
+        return 'You lost the game!';
+    }
+    else {
+        return 'It is a tie game!';
+    }
+}
 }
 
 
-function getWinner(first, second){
-    let winner;
-    const pair1 = [PAPER, SCISSORS];
-    const pair2 =[ROCK, PAPER];
-    const pair3 = [SCISSORS, ROCK];
-
-    if (pair1.includes(first) && pair1.includes(second)){
-        winner = SCISSORS;
-    } 
-    else if (pair2.includes(first) && pair2.includes(second)){
-        winner = PAPER;
-    }
-    else if (pair3.includes(first) && pair3.includes(second)){
-        winner = ROCK;
-    }
-    return winner;
-}
-
-
-
-console.log(playRound(playerSelection, computerSelection));
+console.log(game());
