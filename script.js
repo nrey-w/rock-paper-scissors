@@ -35,16 +35,18 @@ function determineWinner(selection1, selection2){
 function playRound(playerSelection, computerSelection){
     
     let playerSelectionLower = playerSelection.toLowerCase();
-    if (playerSelectionLower==computerSelection) {
+    if (playerSelectionLower === computerSelection) {
         return 'It is a tie!';
     } 
 
     let winner = determineWinner(playerSelectionLower, computerSelection);
 
     if (playerSelectionLower == winner) {
-        return `You Won! ${playerSelection} beats ${computerSelection}.`;
+        console.log(`You Won! ${playerSelection} beats ${computerSelection}.`);
+        return true;
     } else {
-        return `You Lost! ${computerSelection} beats ${playerSelection}.`;
+        console.log(`You Lost! ${computerSelection} beats ${playerSelection}.`);
+        return false;
     }
 
 }
@@ -56,9 +58,9 @@ function game(){
     let playerSelection;
     let computerSelection;
     let round;
-    let isValid;
+ 
 
-    for (let index=1; index<=5; index++){
+    for (let index=1; index<=3; index++){
 
         playerSelection = prompt("Scissors, rock or paper?");
         if (playerSelection==null){
@@ -68,42 +70,56 @@ function game(){
             else {
                 break;
             }
-        } else if (playerSelection == '' || !OPTIONS.includes(playerSelection.toLowerCase())){
+        } else if (!OPTIONS.includes(playerSelection.toLowerCase())){
             alert("Invalid input!");
             continue;
             }
+
             
 
-       computerSelection = computerPlay()
+       //computerSelection = computerPlay();
+       computerSelection = 'rock';
        console.log(`----- Round ${index} -----`);
        console.log(`Player: ${playerSelection}`);
        console.log(`Computer: ${computerSelection}`);
        round = playRound(playerSelection, computerSelection);
        console.log(round);
-        if (round.includes('You Won!')){
+       if (round === 'It is a tie!'){
+        index--;
+        continue;
+    } 
+       else if (round){
             ++playerCount; 
         }
-        else if(round.includes('You Lost!')){
+        else {
             ++computerCount;        
         }
         console.log(`Player: ${playerCount}`);
         console.log(`Computer: ${computerCount}`);
 
     }
-    if (playerSelection==null){
+    if (playerSelection === null){
         alert("Aborting the game!");
-    }else {
+        return "Aborting the game!";
+    }
+    else {   
+        return gameOver(playerCount, computerCount, playerSelection);
+    }
+}
+
+function gameOver(playerCount, computerCount, playerSelection){
     if (playerCount > computerCount){
         return 'You won the game!'
     }
     else if(playerCount < computerCount){
         return 'You lost the game!';
     }
+    else if (!OPTIONS.includes(playerSelection.toLowerCase())){
+        return 'Invalid input!';
+    }
     else {
         return 'It is a tie game!';
     }
 }
-}
-
 
 console.log(game());
