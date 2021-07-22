@@ -70,7 +70,7 @@ function game(){
             }
         } else if (playerSelection == '' || !OPTIONS.includes(playerSelection.toLowerCase())){
             alert("Invalid input!");
-            playerSelection = prompt("Choose scissors, rock or paper?");
+            continue;
             }
             
 
