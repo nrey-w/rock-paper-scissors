@@ -2,6 +2,15 @@ const PAPER = 'paper';
 const ROCK = 'rock';
 const SCISSORS = 'scissors';
 const OPTIONS = [PAPER, ROCK, SCISSORS];
+let playerCount = 0;
+let computerCount = 0;
+let round;
+let index=1;
+let result = document.querySelector("#answer");
+let computerScore = document.querySelector("#computerScore");
+let playerScore = document.querySelector("#playerScore");
+let roundScore = document.querySelector("#round");
+
 
 function generateRandomInt(max){
     return Math.floor(Math.random() * max);
@@ -32,77 +41,61 @@ function determineWinner(selection1, selection2){
 
 }
 
-function playRound(playerSelection, computerSelection){
-    
-    let playerSelectionLower = playerSelection.toLowerCase();
-    if (playerSelectionLower === computerSelection) {
+function playRound(computerSelection, playerSelection){
+
+    if (playerSelection === computerSelection) {
+        result.textContent = 'It is a tie!';
         console.log('It is a tie!');
         return 0;
     } 
 
-    let winner = determineWinner(playerSelectionLower, computerSelection);
+    let winner = determineWinner(playerSelection, computerSelection);
 
-    if (playerSelectionLower === winner) {
+
+    if (playerSelection === winner) {
         console.log(`You Won! ${playerSelection} beats ${computerSelection}.`);
+        result.textContent = `You Won! ${playerSelection} beats ${computerSelection}.`;
         return true;
     } else {
         console.log(`You Lost! ${computerSelection} beats ${playerSelection}.`);
+        result.textContent = `You Lost! ${computerSelection} beats ${playerSelection}.`;
         return false;
     }
 
 }
 
-function game(){
+function playGame(e){
 
-    let playerCount = 0;
-    let computerCount = 0;
-    let playerSelection;
-    let computerSelection;
-    let round;
- 
+    roundScore.textContent = index;
+    let playerSelection = this.textContent.toLowerCase();
+    let computerSelection = computerPlay();
 
-    for (let index=1; index<=5; index++){
-
-        playerSelection = prompt("Scissors, rock or paper?");
-        if (playerSelection === null){
-            if (confirm("Do you wish to play?")){
-                continue;
-            }
-            else {
-                break;
-            }
-        } else if (!OPTIONS.includes(playerSelection.toLowerCase())){
-            alert("Invalid input!");
-            continue;
-            }
-
-       computerSelection = computerPlay();
        console.log(`----- Round ${index} -----`);
        console.log(`Player: ${playerSelection}`);
        console.log(`Computer: ${computerSelection}`);
        round = playRound(playerSelection, computerSelection);
 
        if (round === 0){
-        index--;
-        continue;
+        
         } 
        else if (round) {
             ++playerCount; 
+            index++;
         }
         else {
-            ++computerCount;        
+            ++computerCount;  
+            index++;      
         }
+        computerScore.textContent = computerCount;
+        playerScore.textContent = playerCount;
+        
         console.log(`Player: ${playerCount}`);
         console.log(`Computer: ${computerCount}`);
+
+    if (index===3){
+        result.textContent = gameOver(playerCount, computerCount, playerSelection);
     }
 
-    if (playerSelection === null){
-        alert("Aborting the game!");
-        return "Aborting the game!";
-    }
-    else {   
-        return gameOver(playerCount, computerCount, playerSelection);
-    }
 }
 
 function gameOver(playerCount, computerCount, playerSelection){
@@ -120,4 +113,11 @@ function gameOver(playerCount, computerCount, playerSelection){
     }
 }
 
-console.log(game());
+const buttons = document.querySelectorAll(".buttons");
+
+
+
+buttons.forEach (button => {
+    button.addEventListener("click", playGame);
+});
+
