@@ -1,126 +1,103 @@
-html{
-    height: 100%;
-    background: url('images/background.jpeg');
-    background-position: center;
-    background-size: cover;
-    font-weight: bold;
-    color: white;
-    font-family:  orbitron;
+html {
+  height: 100%;
+  background: url("images/background.jpeg");
+  background-position: center;
+  background-size: cover;
+  font-weight: bold;
+  color: white;
+  font-family: orbitron;
 }
 
-#inner{
-
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 70px; 
+#inner {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
 }
 
 .buttons {
-    min-height: 45vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
+  min-height: 45vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-
-.button{
-    
-    border: .4rem solid white;
-    border-radius: 30px;
-    margin: 2rem;
-    font-size: 1.5rem;
-    padding: 1rem .5rem;
-    transition: all .07s ease;
-    width: 200px;
-    height: 200px;
-    text-align: center;
-    color: white;
-    background: rgba(0,0,0,0.4);
-    text-shadow: 0 0 .5rem black;
-
+.button {
+  border: 0.4rem solid white;
+  border-radius: 30px;
+  margin: 2rem;
+  font-size: 1.5rem;
+  padding: 1rem 0.5rem;
+  transition: all 0.07s ease;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 0.5rem black;
 }
 
-.button:hover{
-    border: .2rem solid greenyellow;
-    width: 250px;
-    height: 250px;
+.button:hover {
+  border: 0.2rem solid greenyellow;
+  width: 250px;
+  height: 250px;
 }
 
-
-#rule{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem;
-    font-size: 45px;
-   
+#rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+  font-size: 45px;
 }
 
-#container{
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 35px;
-
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
 }
 
-#box1, #box2{
-    height: 300px;
-    width: 200px;
-  
+#box1,
+#box2 {
+  height: 300px;
+  width: 200px;
 }
 
-
-#box3{
-    height: 300px;
-    width: 400px;
-
+#box3 {
+  height: 300px;
+  width: 400px;
 }
 
-
-#rock{
-    background: url('images/rock.jpeg');
-    background-position: center;
-    background-size: cover;
+#rock {
+  background: url("images/rock.jpeg");
+  background-position: center;
+  background-size: cover;
 }
 
-#paper{
-    background: url('images/paper.jpeg');
-    background-position: center;
-    background-size: cover;
+#paper {
+  background: url("images/paper.jpeg");
+  background-position: center;
+  background-size: cover;
 }
 
-#scissors{
-    background: url('images/scissors.jpeg');
-    background-position: center;
-    background-size: cover;
+#scissors {
+  background: url("images/scissors.jpeg");
+  background-position: center;
+  background-size: cover;
 }
 
-
-
-h1{
-    padding: 1rem .5rem;
-    font-size: 60px;
-    text-align: center;
+h1 {
+  padding: 1rem 0.5rem;
+  font-size: 60px;
+  text-align: center;
 }
 
-.neonText{
-    animation: flicker 1.5s infinite alternate;
-    color: rgb(255, 255, 255);
-    text-shadow:
-        0 0 7px rgb(255, 255, 255),
-        0 0 10px rgb(255, 255, 255),
-        0 0 21px #fff,
-        0 0 42px #0fa,
-        0 0 82px #0fa,
-        0 0 92px #0fa,
-        0 0 102px #0fa,
-        0 0 151px #0fa;
-  
+.neonText {
+  animation: flicker 1.5s infinite alternate;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 7px rgb(255, 255, 255), 0 0 10px rgb(255, 255, 255),
+    0 0 21px #fff, 0 0 42px #0fa, 0 0 82px #0fa, 0 0 92px #0fa, 0 0 102px #0fa,
+    0 0 151px #0fa;
 }
-
