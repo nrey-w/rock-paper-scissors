@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock-Paper-Scissors</title>
+        <title>Rock-Paper-Scissors</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
 </head>
-<body>
-    <button id="rock" class="buttons">Rock</button>
-    <button id="scissors" class="buttons">Scissors</button>
-    <button id="paper" class="buttons">Paper</button>
-    <div id="roundCount">Round: 
-        <div id="round"></div>
+<body class="neonText">
+    <h1 >Rock, Paper, Scissors!</h1>
+
+    <div class="buttons">
+        <div id= "rock" text ="Rock" class="button"></div >
+        <div id= "paper" text ="Paper" class="button"></div >
+        <div  id="scissors" text ="Scissors" class="button"></div >
+    </div>
+    <div id="rule"  >First 5 to win! </div>  
+    <div id="container" >
+        
+    <div id="box1" >
+        <div id="computer">Computer</div>
+        <div id="player" >You </div>
+        
     </div>
 
-    <div id="computer">Computer
+    <div id="box2">
         <div id="computerScore"></div>
-    </div>
-
-    <div id="player">Player
         <div id="playerScore"></div>
     </div>
+    <div id="box3">
+        <div id="answer" ></div>
+    </div>
+   
+</div>
+<audio id="sound" src="sounds/tink.wav"></audio>
 
-    <div id="answer"></div>
 </body>
 <script src="script.js"></script>
 </html>

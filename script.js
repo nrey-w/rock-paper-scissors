@@ -1,15 +1,16 @@
-const PAPER = 'paper';
-const ROCK = 'rock';
-const SCISSORS = 'scissors';
+const PAPER = 'Paper';
+const ROCK = 'Rock';
+const SCISSORS = 'Scissors';
 const OPTIONS = [PAPER, ROCK, SCISSORS];
+
 let playerCount = 0;
 let computerCount = 0;
 let round;
-let index=1;
 let result = document.querySelector("#answer");
 let computerScore = document.querySelector("#computerScore");
 let playerScore = document.querySelector("#playerScore");
-let roundScore = document.querySelector("#round");
+let sound = document.querySelector("#sound");
+
 
 
 function generateRandomInt(max){
@@ -41,15 +42,17 @@ function determineWinner(selection1, selection2){
 
 }
 
-function playRound(computerSelection, playerSelection){
+function playRound(playerSelection, computerSelection){
 
     if (playerSelection === computerSelection) {
         result.textContent = 'It is a tie!';
         console.log('It is a tie!');
         return 0;
     } 
-
+    console.log(playerSelection);
     let winner = determineWinner(playerSelection, computerSelection);
+    console.log(playerSelection, winner);
+    console.log(playerSelection === winner);
 
 
     if (playerSelection === winner) {
@@ -66,58 +69,72 @@ function playRound(computerSelection, playerSelection){
 
 function playGame(e){
 
-    roundScore.textContent = index;
-    let playerSelection = this.textContent.toLowerCase();
+    playAudio();
+    let playerSelection = this.getAttribute("text");
     let computerSelection = computerPlay();
 
-       console.log(`----- Round ${index} -----`);
+       
        console.log(`Player: ${playerSelection}`);
        console.log(`Computer: ${computerSelection}`);
-       round = playRound(playerSelection, computerSelection);
+       roundResult = playRound(playerSelection, computerSelection);
 
-       if (round === 0){
+       console.log(roundResult);
+ 
+       if (roundResult === 0){
         
         } 
-       else if (round) {
+       else if (roundResult) {
             ++playerCount; 
-            index++;
         }
         else {
             ++computerCount;  
-            index++;      
+                
         }
+
         computerScore.textContent = computerCount;
         playerScore.textContent = playerCount;
         
         console.log(`Player: ${playerCount}`);
         console.log(`Computer: ${computerCount}`);
 
-    if (index===3){
-        result.textContent = gameOver(playerCount, computerCount, playerSelection);
-    }
+        if (playerCount >= 5 || computerCount >= 5 ){
+            let  finalMessage = gameOver(playerCount, computerCount, playerSelection);
+            result.textContent = finalMessage;
+
+            let div = `<div id="inner">Game Over!!!  ${finalMessage}</div>`;
+            document.body.innerHTML = div;
+     
+         }
 
 }
 
-function gameOver(playerCount, computerCount, playerSelection){
+function gameOver(playerCount, computerCount){
+    buttons.forEach (button => {
+        button.removeEventListener("click", playGame);
+    });
     if (playerCount > computerCount){
         return 'You won the game!'
     }
     else if(playerCount < computerCount){
         return 'You lost the game!';
     }
-    else if (!OPTIONS.includes(playerSelection.toLowerCase())){
-        return 'Invalid input!';
-    }
     else {
         return 'It is a tie game!';
     }
+
 }
 
-const buttons = document.querySelectorAll(".buttons");
+function playAudio(){
+    sound.currentTime = 0;
+    sound.play();
+
+}
 
 
+const buttons = document.querySelectorAll(".button");
 
 buttons.forEach (button => {
+
     button.addEventListener("click", playGame);
 });
 
