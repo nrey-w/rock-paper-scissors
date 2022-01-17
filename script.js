@@ -39,20 +39,15 @@ function determineWinner(selection1, selection2) {
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     result.textContent = "It is a tie!";
-    console.log("It is a tie!");
     return 0;
   }
-  console.log(playerSelection);
+
   let winner = determineWinner(playerSelection, computerSelection);
-  console.log(playerSelection, winner);
-  console.log(playerSelection === winner);
 
   if (playerSelection === winner) {
-    console.log(`You Won! ${playerSelection} beats ${computerSelection}.`);
     result.textContent = `You Won! ${playerSelection} beats ${computerSelection}.`;
     return true;
   } else {
-    console.log(`You Lost! ${computerSelection} beats ${playerSelection}.`);
     result.textContent = `You Lost! ${computerSelection} beats ${playerSelection}.`;
     return false;
   }
@@ -62,12 +57,7 @@ function playGame(e) {
   playAudio();
   let playerSelection = this.getAttribute("text");
   let computerSelection = computerPlay();
-
-  console.log(`Player: ${playerSelection}`);
-  console.log(`Computer: ${computerSelection}`);
   roundResult = playRound(playerSelection, computerSelection);
-
-  console.log(roundResult);
 
   if (roundResult === 0) {
   } else if (roundResult) {
@@ -78,9 +68,6 @@ function playGame(e) {
 
   computerScore.textContent = computerCount;
   playerScore.textContent = playerCount;
-
-  console.log(`Player: ${playerCount}`);
-  console.log(`Computer: ${computerCount}`);
 
   if (playerCount >= 5 || computerCount >= 5) {
     let finalMessage = gameOver(playerCount, computerCount, playerSelection);
