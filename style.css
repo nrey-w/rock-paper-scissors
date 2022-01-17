@@ -4,7 +4,7 @@ body {
     background-size: cover;
     font-weight: bold;
     font-family: orbitron;
-    margin: 0;
+    margin: 0px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
