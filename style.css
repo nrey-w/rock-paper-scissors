@@ -42,6 +42,7 @@ body {
 
 .button:hover,
 .button:focus {
+    transform: scale(1.1);
     border: 0.2rem solid greenyellow;
     box-shadow: 10px 10px 10px greenyellow;
     cursor: pointer;
